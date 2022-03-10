@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TaskCardWidget extends StatelessWidget {
@@ -37,5 +38,51 @@ class TaskCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class TaskWidget extends StatelessWidget {
+  final title, isDone;
+
+  const TaskWidget({Key? key, this.title, required this.isDone})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24.0,
+        vertical: 4.0,
+      ),
+      child: Row(children: [
+        Container(
+          margin: const EdgeInsets.only(right: 10.0),
+          width: 20.0,
+          height: 20.0,
+          decoration: BoxDecoration(
+              color: isDone ? const Color(0xFF7349FE) : Colors.transparent,
+              border: isDone
+                  ? null
+                  : Border.all(color: const Color(0xFF211551), width: 1),
+              borderRadius: BorderRadius.circular(6.0)),
+          child: Image.asset("assets/images/check_icon.png"),
+        ),
+        Text(
+          title ?? "(Unnamed Task)",
+          style: TextStyle(
+              color: isDone ? const Color(0xFF211551) : const Color(0xFF86829D),
+              fontSize: 16.0,
+              fontWeight: isDone ? FontWeight.bold : FontWeight.w500),
+        ),
+      ]),
+    );
+  }
+}
+
+class NoGlowBehaviour extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
