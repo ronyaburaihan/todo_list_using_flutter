@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list/database_helper.dart';
+import 'package:todo_list/models/task_item.dart';
 import 'package:todo_list/pages/taskpage.dart';
-import 'package:todo_list/widgets.dart';
+
+import '../widgets.dart';
 
 class HomPage extends StatefulWidget {
   const HomPage({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class HomPage extends StatefulWidget {
 }
 
 class _HomPageState extends State<HomPage> {
+  final DatabaseHelper _dbHelper = DatabaseHelper();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,24 +36,21 @@ class _HomPageState extends State<HomPage> {
                     ),
                   ),
                   Expanded(
-                    child: ScrollConfiguration(
-                      behavior: NoGlowBehaviour(),
-                      child: ListView(
-                        children: [
-                          TaskCardWidget(
-                            title: "Get Started",
-                            description:
-                                "Welcome to Todo List application. Here you can add and view your task easily",
+                    child: FutureBuilder<List<TaskItem>>(
+                      initialData: const [],
+                      future: _dbHelper.getTasks(),
+                      builder: (context, snapshot) {
+                        return ScrollConfiguration(
+                          behavior: NoGlowBehaviour(),
+                          child: ListView.builder(
+                            itemBuilder: (context, index) {
+                              return TaskCardWidget(
+                                  title: snapshot.data![index].title);
+                            },
+                            itemCount: snapshot.data!.length,
                           ),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                          TaskCardWidget(),
-                        ],
-                      ),
+                        );
+                      },
                     ),
                   )
                 ],
@@ -61,7 +63,7 @@ class _HomPageState extends State<HomPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TaskPage(),
+                        builder: (context) => const TaskPage(),
                       ),
                     );
                   },

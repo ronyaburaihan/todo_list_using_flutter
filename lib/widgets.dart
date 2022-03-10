@@ -11,7 +11,7 @@ class TaskCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24.0),
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       margin: const EdgeInsets.only(bottom: 12.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -25,7 +25,7 @@ class TaskCardWidget extends StatelessWidget {
             style: const TextStyle(
                 color: Color(0xFF211551),
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0),
+                fontSize: 24.0),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 4.0),

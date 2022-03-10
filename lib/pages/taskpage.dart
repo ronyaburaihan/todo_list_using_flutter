@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list/database_helper.dart';
+import 'package:todo_list/models/task_item.dart';
 import 'package:todo_list/widgets.dart';
 
 class TaskPage extends StatefulWidget {
@@ -29,7 +31,7 @@ class _TaskPageState extends State<TaskPage> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: Icon(
+                          child: const Icon(
                             CupertinoIcons.arrow_left,
                             color: Color(0xFF211551),
                           ),
@@ -37,11 +39,21 @@ class _TaskPageState extends State<TaskPage> {
                       ),
                       Expanded(
                         child: TextField(
-                          decoration: InputDecoration(
+                          onSubmitted: (value) async {
+                            if (value != "") {
+                              DatabaseHelper _dbHelper = DatabaseHelper();
+                              await _dbHelper.insertTask(TaskItem(
+                                2,
+                                value,
+                                "Welcome to todo application. This application is made by flutter.",
+                              ));
+                            }
+                          },
+                          decoration: const InputDecoration(
                             hintText: "Enter Task Title",
                             border: InputBorder.none,
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF211551)),
@@ -50,13 +62,13 @@ class _TaskPageState extends State<TaskPage> {
                     ],
                   ),
                 ),
-                TextField(
+                const TextField(
                   decoration: InputDecoration(
                       hintText: "Enter task description",
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 24.0)),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TaskWidget(
                   title: "Create database",
                   isDone: false,
@@ -81,14 +93,7 @@ class _TaskPageState extends State<TaskPage> {
               bottom: 24.0,
               right: 24.0,
               child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TaskPage(),
-                    ),
-                  );
-                },
+                onTap: () {},
                 child: Container(
                   height: 55.0,
                   width: 55.0,
