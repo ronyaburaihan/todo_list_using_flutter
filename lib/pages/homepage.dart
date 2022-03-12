@@ -44,8 +44,24 @@ class _HomPageState extends State<HomPage> {
                           behavior: NoGlowBehaviour(),
                           child: ListView.builder(
                             itemBuilder: (context, index) {
-                              return TaskCardWidget(
-                                  title: snapshot.data![index].title);
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TaskPage(
+                                          taskItem: snapshot.data![index]),
+                                    ),
+                                  ).then((value) => {
+                                    setState((){})
+                                  });
+                                },
+                                child: TaskCardWidget(
+                                  title: snapshot.data![index].title,
+                                  description:
+                                      snapshot.data![index].description,
+                                ),
+                              );
                             },
                             itemCount: snapshot.data!.length,
                           ),
@@ -63,9 +79,13 @@ class _HomPageState extends State<HomPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const TaskPage(),
+                        builder: (context) => TaskPage(
+                          taskItem: TaskItem(-1, "", ""),
+                        ),
                       ),
-                    );
+                    ).then((value) => {
+                          setState(() {}),
+                        });
                   },
                   child: Container(
                     height: 55.0,

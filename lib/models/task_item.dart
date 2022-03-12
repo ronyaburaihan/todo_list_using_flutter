@@ -6,7 +6,7 @@ class TaskItem {
 
   Map<String, dynamic> toMap() {
     return {
-      "taskId": taskId,
+      "taskId": taskId == -1 ? null : taskId,
       "title": title,
       "description": description,
     };
