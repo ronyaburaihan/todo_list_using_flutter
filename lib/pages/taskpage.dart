@@ -229,7 +229,7 @@ class _TaskPageState extends State<TaskPage> {
                     height: 55.0,
                     width: 55.0,
                     decoration: BoxDecoration(
-                        color: const Color(0xFFFE3577),
+                        color: const Color(0xFFFF2C2C),
                         borderRadius: BorderRadius.circular(20.0)),
                     child: const Icon(
                       CupertinoIcons.delete,

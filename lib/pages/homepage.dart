@@ -32,7 +32,9 @@ class _HomPageState extends State<HomPage> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 24.0, top: 32.0),
                     child: const Image(
-                      image: AssetImage("assets/images/logo.png"),
+                      image: AssetImage("assets/images/ic_app_logo.png"),
+                      height: 60.0,
+                      width: 60.0,
                     ),
                   ),
                   Expanded(
@@ -92,7 +94,7 @@ class _HomPageState extends State<HomPage> {
                     width: 55.0,
                     decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                            colors: [Color(0xFF7349FE), Color(0xFF643FDB)],
+                            colors: [Color(0xFF1C991C), Color(0xFF179635)],
                             begin: Alignment(0.0, -1.0),
                             end: Alignment(0.0, 1.0)),
                         borderRadius: BorderRadius.circular(20.0)),
